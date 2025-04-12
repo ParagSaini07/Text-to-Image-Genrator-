@@ -1,5 +1,5 @@
 document.getElementById("GenerateBtn").addEventListener("click", async function () {
-    let token = ""
+    let token = "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"
      let input = document.getElementById("textInput").value; // Get input from user
      let imageContainer = document.getElementById("imageContainer");
      let downloadBtn = document.getElementById("downloadBtn")
@@ -22,12 +22,7 @@ document.getElementById("GenerateBtn").addEventListener("click", async function 
        if (!response.ok) {
          throw new Error("API error");
        }
-   
-       const result = await response.blob(); // Get the image as a blob
-       return result;
-     }
-   
-     try {
+       try {
        let imageBlob = await generateImage(input); // Pass 'input' to generateImage
        let imageUrl = URL.createObjectURL(imageBlob); // Create URL for the image blob
        imageContainer.innerHTML = `<img src="${imageUrl}" class="mx-auto rounded-lg shadow-lg" />`; // Display the image
@@ -44,13 +39,19 @@ document.getElementById("GenerateBtn").addEventListener("click", async function 
          link.href = imageUrl;
          link.download = 'generated-image.png'
          link.click()
- 
+           
        })
  
        imageContainer.appendChild(downloadBtn);
  
  
-     } catch (error) {
+     }
+   
+       const result = await response.blob(); // Get the image as a blob
+       return result;
+     }
+   
+   catch (error) {
        console.error("Error generating image:", error);
      }
    });
